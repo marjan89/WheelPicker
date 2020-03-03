@@ -8,6 +8,7 @@ import com.aigestudio.wheelpicker.WheelPicker;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
+import java.util.Locale;
 
 /**
  * 月份选择器
@@ -27,9 +28,12 @@ public class WheelMonthPicker extends WheelPicker implements IWheelMonthPicker {
     public WheelMonthPicker(Context context, AttributeSet attrs) {
         super(context, attrs);
 
-        List<Integer> data = new ArrayList<>();
-        for (int i = 1; i <= 12; i++)
-            data.add(i);
+        List<String> data = new ArrayList<>();
+        Calendar calendar = Calendar.getInstance();
+        for (int i = 0; i < 12; i++) {
+            calendar.set(Calendar.MONTH, i);
+            data.add(calendar.getDisplayName(Calendar.MONTH, Calendar.LONG, Locale.getDefault()));
+        }
         super.setData(data);
 
         mSelectedMonth = Calendar.getInstance().get(Calendar.MONTH) + 1;
@@ -58,6 +62,6 @@ public class WheelMonthPicker extends WheelPicker implements IWheelMonthPicker {
 
     @Override
     public int getCurrentMonth() {
-        return Integer.valueOf(String.valueOf(getData().get(getCurrentItemPosition())));
+        return getCurrentItemPosition() + 1;
     }
 }

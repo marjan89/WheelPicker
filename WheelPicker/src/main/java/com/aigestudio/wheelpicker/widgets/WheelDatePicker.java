@@ -1,6 +1,7 @@
 package com.aigestudio.wheelpicker.widgets;
 
 import android.content.Context;
+import android.content.res.TypedArray;
 import android.graphics.Typeface;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
@@ -21,8 +22,7 @@ import java.util.Locale;
 public class WheelDatePicker extends LinearLayout implements WheelPicker.OnItemSelectedListener,
         IDebug, IWheelPicker, IWheelDatePicker, IWheelYearPicker, IWheelMonthPicker,
         IWheelDayPicker {
-    private static final SimpleDateFormat SDF =
-            new SimpleDateFormat("yyyy-M-d", Locale.getDefault());
+    private static final SimpleDateFormat SDF = new SimpleDateFormat("yyyy-M-d", Locale.getDefault());
 
     private WheelYearPicker mPickerYear;
     private WheelMonthPicker mPickerMonth;
@@ -43,24 +43,50 @@ public class WheelDatePicker extends LinearLayout implements WheelPicker.OnItemS
 
         LayoutInflater.from(context).inflate(R.layout.view_wheel_date_picker, this);
 
-        mPickerYear = (WheelYearPicker) findViewById(R.id.wheel_date_picker_year);
-        mPickerMonth = (WheelMonthPicker) findViewById(R.id.wheel_date_picker_month);
-        mPickerDay = (WheelDayPicker) findViewById(R.id.wheel_date_picker_day);
+        mPickerYear = findViewById(R.id.wheel_date_picker_year);
+        mPickerMonth = findViewById(R.id.wheel_date_picker_month);
+        mPickerDay = findViewById(R.id.wheel_date_picker_day);
         mPickerYear.setOnItemSelectedListener(this);
         mPickerMonth.setOnItemSelectedListener(this);
         mPickerDay.setOnItemSelectedListener(this);
 
         setMaximumWidthTextYear();
-        mPickerMonth.setMaximumWidthText("00");
+//        mPickerMonth.setMaximumWidthText("00");
         mPickerDay.setMaximumWidthText("00");
 
-        mTVYear = (TextView) findViewById(R.id.wheel_date_picker_year_tv);
-        mTVMonth = (TextView) findViewById(R.id.wheel_date_picker_month_tv);
-        mTVDay = (TextView) findViewById(R.id.wheel_date_picker_day_tv);
+        mTVYear = findViewById(R.id.wheel_date_picker_year_tv);
+        mTVMonth = findViewById(R.id.wheel_date_picker_month_tv);
+        mTVDay = findViewById(R.id.wheel_date_picker_day_tv);
 
         mYear = mPickerYear.getCurrentYear();
         mMonth = mPickerMonth.getCurrentMonth();
         mDay = mPickerDay.getCurrentDay();
+
+        TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.WheelDatePicker);
+        setItemTextSize(a.getDimensionPixelSize(R.styleable.WheelDatePicker_wheel_date_item_text_size,
+                getResources().getDimensionPixelSize(R.dimen.WheelItemTextSize)));
+        setVisibleItemCount(a.getInt(R.styleable.WheelDatePicker_wheel_date_visible_item_count, 7));
+
+        setSelectedItemTextColor(a.getColor
+                (R.styleable.WheelDatePicker_wheel_date_selected_item_text_color, -1));
+        setItemTextColor(a.getColor(R.styleable.WheelDatePicker_wheel_date_item_text_color, 0xFF888888));
+        setItemSpace(a.getDimensionPixelSize(R.styleable.WheelDatePicker_wheel_date_item_space_vertical,
+                getResources().getDimensionPixelSize(R.dimen.WheelItemSpace)));
+        setItemSpaceVertical(a.getDimensionPixelSize(R.styleable.WheelDatePicker_wheel_date_item_space_horizontal,
+                getResources().getDimensionPixelSize(R.dimen.WheelItemSpace)));
+        setCyclic(a.getBoolean(R.styleable.WheelDatePicker_wheel_date_cyclic, false));
+        setIndicator(a.getBoolean(R.styleable.WheelDatePicker_wheel_date_indicator, false));
+        setIndicatorColor(a.getColor(R.styleable.WheelDatePicker_wheel_date_indicator_color, 0xFFEE3333));
+        setIndicatorSize(a.getDimensionPixelSize(R.styleable.WheelDatePicker_wheel_date_indicator_size,
+                getResources().getDimensionPixelSize(R.dimen.WheelIndicatorSize)));
+        setCurtain(a.getBoolean(R.styleable.WheelDatePicker_wheel_date_curtain, false));
+        setCurtainColor(a.getColor(R.styleable.WheelDatePicker_wheel_date_curtain_color, 0x88FFFFFF));
+        setAtmospheric(a.getBoolean(R.styleable.WheelDatePicker_wheel_date_atmospheric, false));
+        setCurved(a.getBoolean(R.styleable.WheelDatePicker_wheel_date_curved, false));
+        setLabelsVisible(a.getBoolean(R.styleable.WheelDatePicker_wheel_date_labels_visible, false));
+        setYear(a.getInteger(R.styleable.WheelDatePicker_wheel_date_year, 1000));
+
+        a.recycle();
     }
 
     private void setMaximumWidthTextYear() {
@@ -78,7 +104,7 @@ public class WheelDatePicker extends LinearLayout implements WheelPicker.OnItemS
             mYear = (int) data;
             mPickerDay.setYear(mYear);
         } else if (picker.getId() == R.id.wheel_date_picker_month) {
-            mMonth = (int) data;
+            mMonth = position + 1;
             mPickerDay.setMonth(mMonth);
         }
         mDay = mPickerDay.getCurrentDay();
@@ -276,6 +302,21 @@ public class WheelDatePicker extends LinearLayout implements WheelPicker.OnItemS
         mPickerYear.setItemSpace(space);
         mPickerMonth.setItemSpace(space);
         mPickerDay.setItemSpace(space);
+    }
+
+    public void setItemSpaceVertical(int space) {
+        LinearLayout.LayoutParams layoutParams = (LayoutParams) mPickerDay.getLayoutParams();
+        layoutParams.setMarginEnd(space);
+        mPickerDay.setLayoutParams(layoutParams);
+        layoutParams = (LayoutParams) mPickerMonth.getLayoutParams();
+        layoutParams.setMarginEnd(space);
+        mPickerMonth.setLayoutParams(layoutParams);
+    }
+
+    private void setLabelsVisible(boolean visible) {
+        mTVMonth.setVisibility(visible ? VISIBLE : GONE);
+        mTVDay.setVisibility(visible ? VISIBLE : GONE);
+        mTVYear.setVisibility(visible ? VISIBLE : GONE);
     }
 
     @Override

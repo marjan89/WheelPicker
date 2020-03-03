@@ -26,4 +26,22 @@
         </attr>
         <attr name="wheel_font_path" format="string" />
     </declare-styleable>
+    <declare-styleable name="WheelDatePicker">
+        <attr name="wheel_date_item_text_color" format="color" />
+        <attr name="wheel_date_item_text_size" format="dimension" />
+        <attr name="wheel_date_visible_item_count" format="integer" />
+        <attr name="wheel_date_selected_item_text_color" format="color" />
+        <attr name="wheel_date_item_space_vertical" format="dimension" />
+        <attr name="wheel_date_item_space_horizontal" format="dimension" />
+        <attr name="wheel_date_cyclic" format="boolean" />
+        <attr name="wheel_date_indicator" format="boolean" />
+        <attr name="wheel_date_indicator_color" format="color" />
+        <attr name="wheel_date_indicator_size" format="dimension" />
+        <attr name="wheel_date_curtain" format="boolean" />
+        <attr name="wheel_date_curtain_color" format="color" />
+        <attr name="wheel_date_atmospheric" format="boolean" />
+        <attr name="wheel_date_curved" format="boolean" />
+        <attr name="wheel_date_labels_visible" format="boolean" />
+        <attr name="wheel_date_year" format="integer" />
+    </declare-styleable>
 </resources>
