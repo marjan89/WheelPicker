@@ -2,10 +2,13 @@ package com.aigestudio.wheelpicker.demo;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.aigestudio.wheelpicker.WheelPicker;
 import com.aigestudio.wheelpicker.widgets.WheelDatePicker;
+
+import java.util.Date;
 
 /**
  * @author AigeStudio 2015-12-06
@@ -22,6 +25,12 @@ public class PreviewActivity extends Activity implements WheelPicker.OnItemSelec
 
         wheelLeft = findViewById(R.id.main_wheel_left);
         wheelLeft.setCyclic(true);
+        wheelLeft.setOnDateSelectedListener(new WheelDatePicker.OnDateSelectedListener() {
+            @Override
+            public void onDateSelected(WheelDatePicker picker, Date date) {
+                Log.d("WheelDemo", date.toString());
+            }
+        });
     }
 
     @Override

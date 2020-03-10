@@ -15,6 +15,7 @@ import com.aigestudio.wheelpicker.WheelPicker;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
@@ -450,13 +451,14 @@ public class WheelDatePicker extends LinearLayout implements WheelPicker.OnItemS
 
     @Override
     public Date getCurrentDate() {
-        String date = mYear + "-" + mMonth + "-" + mDay;
-        try {
-            return SDF.parse(date);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-        return null;
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(Calendar.YEAR, mYear);
+        calendar.set(Calendar.MONTH, mMonth);
+        calendar.set(Calendar.DAY_OF_MONTH, mDay);
+        calendar.set(Calendar.HOUR, 0);
+        calendar.set(Calendar.MINUTE, 0);
+        calendar.set(Calendar.SECOND, 0);
+        return calendar.getTime();
     }
 
     @Override
