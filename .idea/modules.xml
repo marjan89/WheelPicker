@@ -3,8 +3,10 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/Demo/Demo.iml" filepath="$PROJECT_DIR$/Demo/Demo.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Demo/WheelPicker-Demo.iml" filepath="$PROJECT_DIR$/Demo/WheelPicker-Demo.iml" group="WheelPicker/Demo" />
       <module fileurl="file://$PROJECT_DIR$/WheelPicker/WheelPicker-WheelPicker.iml" filepath="$PROJECT_DIR$/WheelPicker/WheelPicker-WheelPicker.iml" />
-      <module fileurl="file://$PROJECT_DIR$/projects-WheelPicker.iml" filepath="$PROJECT_DIR$/projects-WheelPicker.iml" />
+      <module fileurl="file://$PROJECT_DIR$/projects-WheelPicker.iml" filepath="$PROJECT_DIR$/projects-WheelPicker.iml" group="WheelPicker" />
+      <module fileurl="file://$PROJECT_DIR$/WheelPicker/projects-WheelPicker-WheelPicker.iml" filepath="$PROJECT_DIR$/WheelPicker/projects-WheelPicker-WheelPicker.iml" group="WheelPicker/WheelPicker" />
     </modules>
   </component>
 </project>

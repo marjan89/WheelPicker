@@ -1,12 +1,12 @@
 apply plugin: 'com.android.library'
 apply plugin: 'com.novoda.bintray-release'
-def version = '1.1.4'
+def version = '1.1.6'
 android {
     compileSdkVersion 29
     defaultConfig {
         minSdkVersion 21
         targetSdkVersion 29
-        versionCode 9
+        versionCode 10
         versionName version
     }
     buildTypes {

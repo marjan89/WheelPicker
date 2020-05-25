@@ -28,7 +28,8 @@ public class PreviewActivity extends Activity implements WheelPicker.OnItemSelec
         wheelLeft.setOnDateSelectedListener(new WheelDatePicker.OnDateSelectedListener() {
             @Override
             public void onDateSelected(WheelDatePicker picker, Date date) {
-                Log.d("WheelDemo", date.toString());
+                Log.d("WheelDemo", "callback" + " " + date.toString());
+                Log.d("WheelDemo", "current" + " " + picker.getCurrentDate().toString());
             }
         });
     }
